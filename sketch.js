@@ -1,36 +1,55 @@
-const gridContainer = document.querySelector("#grid-container");
 
-let gridSize = 16;
-let isMouseDown = false;
+function changeSize(gridSize) {
+    const gridContainer = document.querySelector("#grid-container");
 
-for (let i = 0; i < gridSize; i++) {
-    const row = document.createElement("div");
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
 
-    row.classList.add("grid-row-style");
-    gridContainer.appendChild(row);
+    let isMouseDown = false;
 
-    for (let j = 0; j < gridSize; j++) {
-        let cell = document.createElement("div");
+    for (let i = 0; i < gridSize; i++) {
+        const row = document.createElement("div");
 
-        cell.classList.add("grid-cell-style");
-        row.appendChild(cell);
+        row.classList.add("grid-row-style");
+        gridContainer.appendChild(row);
 
-        cell.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-            isMouseDown = true;
-            cell.classList.add("highlighted");  
-        });
+        for (let j = 0; j < gridSize; j++) {
+            let cell = document.createElement("div");
 
-        cell.addEventListener("mouseup", () => {
-            isMouseDown = false;
-        });
+            cell.classList.add("grid-cell-style");
+            row.appendChild(cell);
 
-        cell.addEventListener("mouseover", () => {
-            if (isMouseDown) {
-                cell.classList.add("highlighted");
-            }
-        });
+            cell.addEventListener("mousedown", (e) => {
+                e.preventDefault();
+                isMouseDown = true;
+                cell.classList.add("highlighted");  
+            });
+
+            cell.addEventListener("mouseup", () => {
+                isMouseDown = false;
+            });
+
+            cell.addEventListener("mouseover", () => {
+                if (isMouseDown) {
+                    cell.classList.add("highlighted");
+                }
+            });
+        }
     }
 }
 
+changeSize(16);
+
+const btnNewGrid = document.querySelector("#btnNewGrid");
+
+btnNewGrid.addEventListener("click", () => {
+    let input = prompt("Enter the new dimension size (min: 2, max: 100):");
+
+    while (input < 2 || input > 100) {
+        input = prompt("Input out of range. Enter dimension size greater than or equal to 2 and less than or equal to 100:");
+    }
+
+    changeSize(input);
+});
 
