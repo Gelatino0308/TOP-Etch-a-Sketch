@@ -43,7 +43,11 @@ body {
 
 .grid-cell-style {
     flex: 1;
-    border: 1px solid black;
+    border: 1px solid gray;
     aspect-ratio: 1/1;
+}
+
+.highlighted {
+    background-color: black;
 }
 
