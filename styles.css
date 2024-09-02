@@ -9,14 +9,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: white;
 }
-
-/* div {
-    width: 960px;
-    border: 2px solid black;
-    height: 500px;
-} */
 
 .block {
     display: flex;
@@ -34,8 +28,22 @@ body {
 }
 
 #grid-container {
-    width: 1000px;
-    height: 500px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 600px;
     background-color: yellow;
+    border: 1px solid black;
+}
+
+.grid-row-style {
+    background-color: white;
+    display: flex;
+}
+
+.grid-cell-style {
+    flex: 1;
+    border: 1px solid black;
+    aspect-ratio: 1/1;
 }
 
