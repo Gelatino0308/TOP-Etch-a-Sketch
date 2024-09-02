@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: blueviolet;
+}
+
+/* div {
+    width: 960px;
+    border: 2px solid black;
+    height: 500px;
+} */
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header {
+    padding: 20px;
+    background-color: yellow;
+}
+
+#content {
+    flex: 1;
+}
+
+#grid-container {
+    width: 1000px;
+    height: 500px;
+    background-color: yellow;
+}
+
