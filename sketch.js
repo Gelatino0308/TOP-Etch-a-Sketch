@@ -1,5 +1,4 @@
 function changeSize(gridSize) {
-    const gridContainer = document.querySelector("#grid-container");
 
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild);
@@ -62,7 +61,21 @@ function checkInput() {
     }
 }
 
+const gridContainer = document.querySelector("#grid-container");
+
 changeSize(16);
 
 const btnNewGrid = document.querySelector("#btnNewGrid");
 btnNewGrid.addEventListener("click", checkInput);
+
+const btnClear = document.querySelector("#btnClear");
+btnClear.addEventListener("click", () => {
+    
+    for (let i = 0; i < gridContainer.children.length; i++) {
+        let rows = gridContainer.children[i];
+        for (let j = 0; j < rows.children.length; j++) {
+            let cells = rows.children[j];
+            cells.classList.remove("highlighted");
+        }
+    }
+});

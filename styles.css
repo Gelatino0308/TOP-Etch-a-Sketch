@@ -33,7 +33,7 @@ body {
 #side-panel {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
     padding: 30px;
     flex: 1;
     background-color: blueviolet;
@@ -48,6 +48,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
     color: yellow;
+    margin-bottom: 20px;
 }
 
 #side-panel button {
