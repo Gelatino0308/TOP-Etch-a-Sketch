@@ -87,7 +87,11 @@ body {
     aspect-ratio: 1/1;
 }
 
-.highlighted {
+
+.blackFill {
     background-color: black;
 }
 
+#side-panel .btn-highlight {
+    background-color: blueviolet; color: yellow;
+}

@@ -21,7 +21,7 @@ function changeSize(gridSize) {
             cell.addEventListener("mousedown", (e) => {
                 e.preventDefault();
                 isMouseDown = true;
-                cell.classList.add("highlighted");  
+                cell.classList.add("blackFill");  
             });
 
             cell.addEventListener("mouseup", () => {
@@ -30,7 +30,7 @@ function changeSize(gridSize) {
 
             cell.addEventListener("mouseover", () => {
                 if (isMouseDown) {
-                    cell.classList.add("highlighted");
+                    cell.classList.add("blackFill");
                 }
             });
             gridContainer.addEventListener("mouseleave", () => {
@@ -41,9 +41,10 @@ function changeSize(gridSize) {
 }
 
 function checkInput() {
-    let input = prompt("Enter the new dimension size (min: 2, max: 100):").trim();
+    let input = prompt("Enter the new dimension size (min: 2, max: 100):");
 
     if (input) {
+        input = input.trim();
         let parsedInput = parseInt(input);
         if (Number.isInteger(parsedInput) && input === parsedInput.toString()) {
             if (input < 2 || input > 100) {
@@ -75,7 +76,57 @@ btnClear.addEventListener("click", () => {
         let rows = gridContainer.children[i];
         for (let j = 0; j < rows.children.length; j++) {
             let cells = rows.children[j];
-            cells.classList.remove("highlighted");
+            cells.classList.remove("blackFill");
         }
     }
+});
+
+const btnEraser = document.querySelector("#btnEraser");
+const btnRandColor = document.querySelector("#btnRandColor");
+const btnDarkening = document.querySelector("#btnDarkening");
+
+let eraseMode = false;
+let randMode = false;
+let darkMode = false;
+
+function shiftMode() {
+    if (eraseMode) {
+        btnEraser.classList.add("btn-highlight");
+    }
+    else {
+        btnEraser.classList.remove("btn-highlight");
+    }
+
+    if (randMode) {
+        btnRandColor.classList.add("btn-highlight");
+    }
+    else {
+        btnRandColor.classList.remove("btn-highlight");
+    }
+
+    if (darkMode) {
+        btnDarkening.classList.add("btn-highlight");
+    }
+    else {
+        btnDarkening.classList.remove("btn-highlight");
+    }
+}
+
+btnEraser.addEventListener("click", () => {
+    eraseMode = !eraseMode;
+    randMode = false;
+    darkMode = false;
+    shiftMode();
+});
+
+btnRandColor.addEventListener("click", () => {
+    randMode = !randMode;
+    eraseMode = false;
+    shiftMode();
+});
+
+btnDarkening.addEventListener("click", () => {
+    darkMode = !darkMode;
+    eraseMode = false;
+    shiftMode();
 });
