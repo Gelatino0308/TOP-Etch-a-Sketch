@@ -1,4 +1,3 @@
-
 function changeSize(gridSize) {
     const gridContainer = document.querySelector("#grid-container");
 
@@ -42,12 +41,6 @@ function changeSize(gridSize) {
     }
 }
 
-changeSize(16);
-
-const btnNewGrid = document.querySelector("#btnNewGrid");
-
-btnNewGrid.addEventListener("click", checkInput);
-
 function checkInput() {
     let input = prompt("Enter the new dimension size (min: 2, max: 100):").trim();
 
@@ -68,3 +61,8 @@ function checkInput() {
         }
     }
 }
+
+changeSize(16);
+
+const btnNewGrid = document.querySelector("#btnNewGrid");
+btnNewGrid.addEventListener("click", checkInput);
