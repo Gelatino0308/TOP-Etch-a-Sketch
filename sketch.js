@@ -35,6 +35,9 @@ function changeSize(gridSize) {
                     cell.classList.add("highlighted");
                 }
             });
+            gridContainer.addEventListener("mouseleave", () => {
+                isMouseDown = false;
+            }); 
         }
     }
 }
@@ -43,13 +46,25 @@ changeSize(16);
 
 const btnNewGrid = document.querySelector("#btnNewGrid");
 
-btnNewGrid.addEventListener("click", () => {
-    let input = prompt("Enter the new dimension size (min: 2, max: 100):");
+btnNewGrid.addEventListener("click", checkInput);
 
-    while (input < 2 || input > 100) {
-        input = prompt("Input out of range. Enter dimension size greater than or equal to 2 and less than or equal to 100:");
+function checkInput() {
+    let input = prompt("Enter the new dimension size (min: 2, max: 100):").trim();
+
+    if (input) {
+        let parsedInput = parseInt(input);
+        if (Number.isInteger(parsedInput) && input === parsedInput.toString()) {
+            if (input < 2 || input > 100) {
+                alert("Input out of range. Enter dimension size greater than or equal to 2 and less than or equal to 100.");
+                checkInput();
+            }
+            else {
+                changeSize(input);
+            }
+        }
+        else {
+            alert("Only non-negative integer values from 2-100 are allowed. Please enter correct value!");
+            checkInput();
+        }
     }
-
-    changeSize(input);
-});
-
+}
