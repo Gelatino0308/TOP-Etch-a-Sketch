@@ -92,6 +92,11 @@ body {
     background-color: black;
 }
 
+.whiteFill {
+    background-color: white;
+}
+
 #side-panel .btn-highlight {
-    background-color: blueviolet; color: yellow;
+    background-color: rgb(79, 2, 118);
+    color: yellow;
 }
