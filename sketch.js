@@ -16,12 +16,11 @@ function changeSize(gridSize) {
             cell.classList.add("grid-cell-style");
             row.appendChild(cell);
 
-            // cell.style.opacity = "1";
             cellArr.push(cell);
 
-            console.log(cellArr.indexOf(cell));
-
             opacityArr[cellArr.indexOf(cell)] = 0.1;
+
+            isColoredArr[cellArr.indexOf(cell)] = false;
         }
     }
 }
@@ -74,15 +73,16 @@ function shiftMode() {
 
 function changeInkColor (e) {
     const index = cellArr.indexOf(e.target);
-    console.log(index);
 
     if (eraseMode || randMode || darkMode) {
         if (eraseMode) {
             cellColor = "";
+            cellArr[index].style.backgroundColor = cellColor;
+            isColoredArr[index] = false;
         }
         else {
             if (randMode) {
-                cellColor = randomizeBGC();
+                isColoredArr[index] = true;
             }
             else {
                 cellColor = "black";
@@ -103,9 +103,12 @@ function changeInkColor (e) {
     else {
         cellColor = "black";
         cellArr[index].style.opacity = "1";
+        cellArr[index].style.backgroundColor = cellColor;
     }
     
-    cellArr[index].style.backgroundColor = cellColor;
+    if (!isColoredArr[index]) {
+        cellArr[index].style.backgroundColor = cellColor;
+    }
 }
 
 function randomizeBGC () {
@@ -119,6 +122,7 @@ function randomizeBGC () {
 let isMouseDown = false;
 const cellArr = [];
 const opacityArr = [];
+const isColoredArr = [];
 let cellColor = 'black';
 
 const gridContainer = document.querySelector("#grid-container");
@@ -150,6 +154,7 @@ let eraseMode = false;
 let randMode = false;
 let darkMode = false;
 
+
 btnEraser.addEventListener("click", (e) => {
     eraseMode = !eraseMode;
     randMode = false;
@@ -174,6 +179,13 @@ gridContainer.addEventListener("mousedown", (e) => {
     e.preventDefault();
     isMouseDown = true;
 
+    const index = cellArr.indexOf(e.target);
+    
+    if (randMode && !isColoredArr[index]) {
+        cellColor = randomizeBGC();
+        cellArr[index].style.backgroundColor = cellColor;
+    }
+
     changeInkColor(e);
 });
 
@@ -184,6 +196,14 @@ gridContainer.addEventListener("mouseup", () => {
 gridContainer.addEventListener("mouseover", (e) => {
 
     if (isMouseDown) {
+
+        const index = cellArr.indexOf(e.target);
+
+        if (randMode && !isColoredArr[index]) {
+            cellColor = randomizeBGC();
+            cellArr[index].style.backgroundColor = cellColor;
+        }
+
         changeInkColor(e);
     }
 });
