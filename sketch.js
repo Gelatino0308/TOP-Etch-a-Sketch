@@ -1,3 +1,21 @@
+let isMouseDown = false;
+const cellArr = [];
+const opacityArr = [];
+const isColoredArr = [];
+let cellColor = 'black';
+
+const gridContainer = document.querySelector("#grid-container");
+const btnEraser = document.querySelector("#btnEraser");
+const btnRandColor = document.querySelector("#btnRandColor");
+const btnDarkening = document.querySelector("#btnDarkening");
+
+let eraseMode = false;
+let randMode = false;
+let darkMode = false;
+
+changeSize(16);
+
+
 function changeSize(gridSize) {
 
     while (gridContainer.firstChild) {
@@ -79,6 +97,7 @@ function changeInkColor (e) {
             cellColor = "";
             cellArr[index].style.backgroundColor = cellColor;
             isColoredArr[index] = false;
+            cellArr[index].style.opacity = "1";
         }
         else {
             if (randMode) {
@@ -119,16 +138,6 @@ function randomizeBGC () {
     return `rgb(${RED}, ${GREEN}, ${BLUE})`;
 }
 
-let isMouseDown = false;
-const cellArr = [];
-const opacityArr = [];
-const isColoredArr = [];
-let cellColor = 'black';
-
-const gridContainer = document.querySelector("#grid-container");
-
-changeSize(16);
-
 
 const btnNewGrid = document.querySelector("#btnNewGrid");
 btnNewGrid.addEventListener("click", checkInput);
@@ -142,17 +151,10 @@ btnClear.addEventListener("click", () => {
         for (let j = 0; j < clearRows.children.length; j++) {
             let clearCells = clearRows.children[j];
             clearCells.style.backgroundColor = "";
+            clearCells.style.opacity = "1";
         }   
     }
 });
-
-const btnEraser = document.querySelector("#btnEraser");
-const btnRandColor = document.querySelector("#btnRandColor");
-const btnDarkening = document.querySelector("#btnDarkening");
-
-let eraseMode = false;
-let randMode = false;
-let darkMode = false;
 
 
 btnEraser.addEventListener("click", (e) => {
