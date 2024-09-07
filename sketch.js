@@ -16,8 +16,7 @@ function changeSize(gridSize) {
             cell.classList.add("grid-cell-style");
             row.appendChild(cell);
 
-            changeInkColor(cell, "blackFill");
-
+            cellArray.push(cell);
         }
     }
 }
@@ -44,29 +43,16 @@ function checkInput() {
     }
 }
 
-function shiftMode() {
+function shiftMode(e) {
+
+    mode = e.target.id;
     
     if (eraseMode) {
         btnEraser.classList.add("btn-highlight");
-
-        for (let i = 0; i < gridContainer.children.length; i++) {
-            let shiftRows = gridContainer.children[i];
-            for (let j = 0; j < shiftRows.children.length; j++) {
-                let shiftCells = shiftRows.children[j];
-                changeInkColor(shiftCells, "whiteFill");
-            }
-        }
     }
     else {
         btnEraser.classList.remove("btn-highlight");
-
-        for (let i = 0; i < gridContainer.children.length; i++) {
-            let shiftRows = gridContainer.children[i];
-            for (let j = 0; j < shiftRows.children.length; j++) {
-                let shiftCells = shiftRows.children[j];
-                changeInkColor(shiftCells, "blackFill");
-            }
-        }
+        mode = "";
     }
 
     if (randMode) {
@@ -84,47 +70,23 @@ function shiftMode() {
     }
 }   
 
-function changeInkColor (cells, colorClass) {
-    
-    cells.addEventListener("mousedown", (e) => {
-        e.preventDefault();
-        isMouseDown = true;
+function changeInkColor (e) {
+    const index = cellArray.indexOf(e.target);
 
-        if(colorClass === 'blackFill') {
-            cells.classList.remove("whiteFill");
-        }
-        else {
-            cells.classList.remove("blackFill");
-        }
-
-        cells.classList.add(colorClass);  
-    });
-
-    cells.addEventListener("mouseup", () => {
-        isMouseDown = false;
-    });
-
-    cells.addEventListener("mouseover", () => {
-
-        if (isMouseDown) {
-            if(colorClass === 'blackFill') {
-                cells.classList.remove("whiteFill");
-            }
-            else {
-                cells.classList.remove("blackFill");
-            }
-
-            cells.classList.add(colorClass);
-        }
-    });
-
-    gridContainer.addEventListener("mouseleave", () => {
-        isMouseDown = false;
-    }); 
+    if (mode === "btnEraser") {
+        cellArray[index].style.backgroundColor = "";
+    }
+    else {
+        cellArray[index].style.backgroundColor = cellColor;
+    }
 }
 
 let isMouseDown = false;
 const gridContainer = document.querySelector("#grid-container");
+const cellArray = [];
+let mode;
+let cellColor = 'black';
+
 changeSize(16);
 
 const btnNewGrid = document.querySelector("#btnNewGrid");
@@ -138,7 +100,7 @@ btnClear.addEventListener("click", () => {
 
         for (let j = 0; j < clearRows.children.length; j++) {
             let clearCells = clearRows.children[j];
-            clearCells.classList.remove("blackFill");
+            clearCells.style.backgroundColor = "";
         }   
     }
 });
@@ -151,24 +113,48 @@ let eraseMode = false;
 let randMode = false;
 let darkMode = false;
 
-btnEraser.addEventListener("click", () => {
+btnEraser.addEventListener("click", (e) => {
     eraseMode = !eraseMode;
     randMode = false;
     darkMode = false;
-    shiftMode();
+    shiftMode(e);
 });
 
-btnRandColor.addEventListener("click", () => {
+btnRandColor.addEventListener("click", (e) => {
     randMode = !randMode;
     eraseMode = false;
-    shiftMode();
+    shiftMode(e);
 });
 
-btnDarkening.addEventListener("click", () => {
+btnDarkening.addEventListener("click", (e) => {
     darkMode = !darkMode;
     eraseMode = false;
-    shiftMode();
+    shiftMode(e);
 });
+
+
+
+gridContainer.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    isMouseDown = true;
+
+    changeInkColor(e);
+});
+
+gridContainer.addEventListener("mouseup", () => {
+    isMouseDown = false;
+});
+
+gridContainer.addEventListener("mouseover", (e) => {
+
+    if (isMouseDown) {
+        changeInkColor(e);
+    }
+});
+
+gridContainer.addEventListener("mouseleave", () => {
+    isMouseDown = false;
+}); 
 
 // const btnClicked = document.querySelectorAll(".highlight");
 
@@ -237,4 +223,12 @@ btnDarkening.addEventListener("click", () => {
 //         }
 //     });
 // });
+
+// for (let i = 0; i < gridContainer.children.length; i++) {
+        //     let shiftRows = gridContainer.children[i];
+        //     for (let j = 0; j < shiftRows.children.length; j++) {
+        //         let shiftCells = shiftRows.children[j];
+        //         changeInkColor(shiftCells, "white");
+        //     }
+        // }
 
