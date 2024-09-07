@@ -43,16 +43,13 @@ function checkInput() {
     }
 }
 
-function shiftMode(e) {
-
-    mode = e.target.id;
+function shiftMode() {
     
     if (eraseMode) {
         btnEraser.classList.add("btn-highlight");
     }
     else {
         btnEraser.classList.remove("btn-highlight");
-        mode = "";
     }
 
     if (randMode) {
@@ -73,21 +70,33 @@ function shiftMode(e) {
 function changeInkColor (e) {
     const index = cellArray.indexOf(e.target);
 
-    if (mode === "btnEraser") {
+    if (eraseMode) {
         cellArray[index].style.backgroundColor = "";
+    }
+    else if (randMode) {
+        cellArray[index].style.backgroundColor = randomizeBGC();
     }
     else {
         cellArray[index].style.backgroundColor = cellColor;
     }
 }
 
+function randomizeBGC () {
+    const RED = Math.floor(Math.random() * 256);
+    const GREEN = Math.floor(Math.random() * 256);
+    const BLUE = Math.floor(Math.random() * 256);
+
+    return `rgb(${RED}, ${GREEN}, ${BLUE})`;
+}
+
 let isMouseDown = false;
-const gridContainer = document.querySelector("#grid-container");
 const cellArray = [];
-let mode;
 let cellColor = 'black';
 
+const gridContainer = document.querySelector("#grid-container");
+
 changeSize(16);
+
 
 const btnNewGrid = document.querySelector("#btnNewGrid");
 btnNewGrid.addEventListener("click", checkInput);
@@ -117,21 +126,20 @@ btnEraser.addEventListener("click", (e) => {
     eraseMode = !eraseMode;
     randMode = false;
     darkMode = false;
-    shiftMode(e);
+    shiftMode();
 });
 
 btnRandColor.addEventListener("click", (e) => {
     randMode = !randMode;
     eraseMode = false;
-    shiftMode(e);
+    shiftMode();
 });
 
 btnDarkening.addEventListener("click", (e) => {
     darkMode = !darkMode;
     eraseMode = false;
-    shiftMode(e);
+    shiftMode();
 });
-
 
 
 gridContainer.addEventListener("mousedown", (e) => {

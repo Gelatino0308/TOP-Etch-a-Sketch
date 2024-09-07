@@ -27,7 +27,6 @@ body {
 #content {
     display: flex;
     flex: 1;
-    justify-content: center;
 }
 
 #side-panel {
@@ -85,15 +84,6 @@ body {
     flex: 1;
     border: 1px solid gray;
     aspect-ratio: 1/1;
-}
-
-
-.blackFill {
-    background-color: black;
-}
-
-.whiteFill {
-    background-color: white;
 }
 
 #side-panel .btn-highlight {
