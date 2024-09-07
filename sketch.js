@@ -16,7 +16,12 @@ function changeSize(gridSize) {
             cell.classList.add("grid-cell-style");
             row.appendChild(cell);
 
-            cellArray.push(cell);
+            // cell.style.opacity = "1";
+            cellArr.push(cell);
+
+            console.log(cellArr.indexOf(cell));
+
+            opacityArr[cellArr.indexOf(cell)] = 0.1;
         }
     }
 }
@@ -68,17 +73,39 @@ function shiftMode() {
 }   
 
 function changeInkColor (e) {
-    const index = cellArray.indexOf(e.target);
+    const index = cellArr.indexOf(e.target);
+    console.log(index);
 
-    if (eraseMode) {
-        cellArray[index].style.backgroundColor = "";
-    }
-    else if (randMode) {
-        cellArray[index].style.backgroundColor = randomizeBGC();
+    if (eraseMode || randMode || darkMode) {
+        if (eraseMode) {
+            cellColor = "";
+        }
+        else {
+            if (randMode) {
+                cellColor = randomizeBGC();
+            }
+            else {
+                cellColor = "black";
+            }
+    
+            if (darkMode) {
+                cellArr[index].style.opacity = opacityArr[index];
+                if (opacityArr[index] < 1) {
+                    opacityArr[index] += 0.1;
+                }
+            }
+            else {
+                cellArr[index].style.opacity = "1";
+            }
+        }
+        
     }
     else {
-        cellArray[index].style.backgroundColor = cellColor;
+        cellColor = "black";
+        cellArr[index].style.opacity = "1";
     }
+    
+    cellArr[index].style.backgroundColor = cellColor;
 }
 
 function randomizeBGC () {
@@ -90,7 +117,8 @@ function randomizeBGC () {
 }
 
 let isMouseDown = false;
-const cellArray = [];
+const cellArr = [];
+const opacityArr = [];
 let cellColor = 'black';
 
 const gridContainer = document.querySelector("#grid-container");
