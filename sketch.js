@@ -157,6 +157,10 @@ btnClear.addEventListener("click", () => {
             clearCells.style.opacity = "1";
         }   
     }
+
+    for (let i = 0; i < isColoredArr.length; i++) {
+        isColoredArr[i] = false;
+    }
 });
 
 
