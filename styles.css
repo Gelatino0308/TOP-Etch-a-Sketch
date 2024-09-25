@@ -24,9 +24,10 @@ body {
     width: 100vw;
     flex: 1;
     padding: 15px;
-    background-color: yellow;
+    background: linear-gradient(to bottom, yellow, rgb(193, 143, 5));
     border: 5px solid black;
     box-shadow: 0 0 5px;
+    text-shadow: 1px 2px 1px rgb(227, 212, 144);
 }
 
 #content {
@@ -41,7 +42,7 @@ body {
     gap: 45px;
     padding: 35px 30px;
     flex: 1;
-    background-color: blueviolet;
+    background: linear-gradient(to bottom, rgb(212, 4, 212), blueviolet);
     align-items: center;
     border-width: 0 5px 5px 5px;
     border-style: solid;
@@ -54,13 +55,13 @@ body {
     font-weight: 600;
     color: yellow;
     margin-bottom: 10px;
-    text-shadow: 0 0 1px black;
+    text-shadow: 0 2px 4px black;
 }
 
 #side-panel button {
     width: 200px;
     font-size: 20px;
-    background-color: yellow;
+    background: linear-gradient(to bottom, yellow, rgb(224, 179, 66));
     font-weight: bold;
     padding: 5px;
     border-radius: 10px;
@@ -95,6 +96,6 @@ body {
 }
 
 #side-panel .btn-highlight {
-    background-color: rgb(79, 2, 118);
+    background: linear-gradient(to bottom, violet, rgb(79, 2, 118));
     color: yellow;
 }
